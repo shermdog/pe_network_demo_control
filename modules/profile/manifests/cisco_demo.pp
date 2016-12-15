@@ -4,19 +4,37 @@ class profile::cisco_demo {
 
   cisco_interface { 'ethernet1/1':
     ensure                                         => 'present',
-    ipv4_address                                   => '1.1.1.1',
-    ipv4_netmask_length                            => '24',
-    mtu                                            => '1600',
-    shutdown                                       => 'false',
+    ipv4_address                                   => $int1_ipaddress,
+    ipv4_netmask_length                            => $int1_netmask,
+    mtu                                            => $int1_mtu,
+    shutdown                                       => $int1_enable,
     switchport_mode                                => 'disabled',
   }
-  
-  cisco_interface { 'ethernet1/2':
+
+cisco_interface { 'ethernet1/2':
     ensure                                         => 'present',
-    ipv4_address                                   => '2.2.2.2',
-    ipv4_netmask_length                            => '24',
-    mtu                                            => '1600',
-    shutdown                                       => 'false',
+    ipv4_address                                   => $int2_ipaddress,
+    ipv4_netmask_length                            => $int2_netmask,
+    mtu                                            => $int2_mtu,
+    shutdown                                       => $int2_enable,
+    switchport_mode                                => 'disabled',
+  }
+
+cisco_interface { 'ethernet1/3':
+    ensure                                         => 'present',
+    ipv4_address                                   => $int3_ipaddress,
+    ipv4_netmask_length                            => $int3_netmask,
+    mtu                                            => $int3_mtu,
+    shutdown                                       => $int3_enable,
+    switchport_mode                                => 'disabled',
+  }
+
+cisco_interface { 'ethernet1/4':
+    ensure                                         => 'present',
+    ipv4_address                                   => $int4_ipaddress,
+    ipv4_netmask_length                            => $int4_netmask,
+    mtu                                            => $int4_mtu,
+    shutdown                                       => $int4_enable,
     switchport_mode                                => 'disabled',
   }
 
