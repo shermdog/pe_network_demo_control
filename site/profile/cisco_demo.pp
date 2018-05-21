@@ -60,12 +60,6 @@ cisco_interface { 'ethernet1/4':
     peer_list           => ['4.4.4.4', '5.5.5.5'],
   }
 
-  cisco_command_config { 'features':
-  command => "
-    feature bgp
-  "
-}
-
   cisco_bgp { '65001 default':
     ensure        => 'present',
     maxas_limit   => '8',
