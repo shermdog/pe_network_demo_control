@@ -1,4 +1,21 @@
-class profile::cisco_demo {
+class profile::cisco_demo (
+  String $int1_ipaddress        = '172.16.1.1',
+  Integer $int1_netmask         = 24,
+  Integer $int1_mtu             = 1500,
+  Boolean $int1_enable          = false,
+  String $int2_ipaddress        = '172.16.2.2',
+  Integer $int2_netmask         = 24,
+  Integer $int2_mtu             = 1500,
+  Boolean $int2_enable          = false,
+  String $int3_ipaddress        = '172.16.3.3',
+  Integer $int3_netmask         = 24,
+  Integer $int3_mtu             = 1500,
+  Boolean $int3_enable          = false,
+  String $int4_ipaddress        = '172.16.4.4',
+  Integer $int4_netmask         = 24,
+  Integer $int4_mtu             = 1500,
+  Boolean $int4_enable          = false
+) {
 
   include ciscopuppet::install
 
