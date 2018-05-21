@@ -65,7 +65,6 @@ cisco_interface { 'ethernet1/4':
     maxas_limit   => '8',
     router_id     => '192.0.2.4',
     shutdown      => 'false',
-    require       => Cisco_command_config['features'],
   }
 
   cisco_bgp_neighbor { '65001 default 192.0.3.1':
