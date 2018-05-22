@@ -1,6 +1,11 @@
 ---
 
 profile::cisco_demo::vlans:
+  "1":
+    ensure: 'present'
+    shutdown: 'false'
+    state: 'active'
+    vlan_name: 'default'
   "200":
     ensure: 'present'
     shutdown: 'false'

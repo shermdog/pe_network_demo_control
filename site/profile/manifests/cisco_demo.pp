@@ -61,4 +61,18 @@ class profile::cisco_demo (
     remote_as => '65004',
     require   => Cisco_bgp['65001 default'],
   }
+
+  # Purge unmanaged resources
+  resources { 'cisco_vlan': 
+    purge => true,
+    before => Cisco_vlan[keys($vlans)]
+  }
+  resources { 'cisco_vxlan_vtep': purge => true }
+  resources { 'cisco_vxlan_vtep_vni': purge => true }
+  resources { 'cisco_bgp': purge => true }
+  resources { 'cisco_bgp_neighbor': purge => true }
+  # ciscopuppet module does not allow changing mgmt interfaces
+  # but we need this here to prevent purge from trying
+  cisco_interface { 'mgmt0': ensure => 'present' }
+  resources { 'cisco_interface': purge => true }
 }

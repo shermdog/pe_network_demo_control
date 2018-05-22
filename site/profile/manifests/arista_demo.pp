@@ -42,4 +42,12 @@ class profile::arista_demo (
     send_community => 'enable',
     next_hop_self  => 'enable',
   }
+
+  # Purge unmanaged resources
+  # We do not want to modify the managment interface
+  eos_ipinterface { 'Management1': ensure  => 'present' }
+  resources { 'eos_ipinterface': purge => true }
+  resources { 'eos_vxlan': purge => true }
+  resources { 'eos_bgp_config': purge => true }
+  resources { 'eos_bgp_neighbor': purge => true }
 }
