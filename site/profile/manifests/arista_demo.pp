@@ -34,18 +34,30 @@ class profile::arista_demo (
     maximum_ecmp_paths => 8,
   }
 
+  eos_bgp_neighbor { 'Edge':
+    ensure         => 'present',
+    enable         => 'true',
+    next_hop_self  => 'disable',
+    send_community => 'disable',
+  }
+
   eos_bgp_neighbor { '192.0.3.1':
-    ensure         => present,
-    enable         => true,
-    peer_group     => 'Edge',
-    remote_as      => 65004,
-    send_community => 'enable',
-    next_hop_self  => 'enable',
+    ensure          => 'present',
+    enable          => 'false',
+    next_hop_self   => 'enable',
+    peer_group      => 'Edge',
+    remote_as       => '65004',
+    send_community  => 'enable',
+    require         => Eos_bgp_neighbor['Edge'],
   }
 
   # Purge unmanaged resources
   # We do not want to modify the managment interface
   eos_ipinterface { 'Management1': ensure  => 'present' }
+  # Vxlan1 ipinterface is automatically created by eos_vxlan
+  eos_ipinterface { 'Vxlan1': ensure  => 'present' }
+  # Loopbacks are also ip interfaces by default
+  eos_ipinterface { 'Loopback1': ensure  => 'present' }
   resources { 'eos_ipinterface': purge => true }
   resources { 'eos_vxlan': purge => true }
   resources { 'eos_bgp_config': purge => true }
